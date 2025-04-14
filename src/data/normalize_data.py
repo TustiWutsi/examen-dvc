@@ -21,7 +21,7 @@ def normalize_data(input_dir: str, output_dir: str):
     X_train_scaled.to_csv(os.path.join(output_dir, 'X_train_scaled.csv'), index=False)
     X_test_scaled.to_csv(os.path.join(output_dir, 'X_test_scaled.csv'), index=False)
     
-    print("Data normalization completed. Processed files saved in", output_dir)
+    print("Processed files saved in", output_dir)
 
 if __name__ == "__main__":    
     if not (os.path.exists("data/processed/X_train.csv") and os.path.exists("data/processed/X_test.csv")):
