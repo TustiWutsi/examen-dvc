@@ -9,7 +9,6 @@ from sklearn.model_selection import train_test_split
 def import_raw_data(raw_data_relative_path, 
                     filenames,
                     bucket_folder_url):
-    """import filenames from bucket_folder_url in raw_data_relative_path"""
     if os.path.exists(raw_data_relative_path)==False:
         os.makedirs(raw_data_relative_path)
     for filename in filenames :
@@ -37,8 +36,6 @@ def main(raw_data_relative_path="./data/raw",
         filenames = ["raw.csv"],
         bucket_folder_url= "https://datascientest-mlops.s3.eu-west-1.amazonaws.com/mlops_dvc_fr/"          
         ):
-    """ Upload data from AWS s3 in ./data/raw
-    """
     output_filepath='./data/processed'
     
     output_file=import_raw_data(raw_data_relative_path, filenames, bucket_folder_url)
