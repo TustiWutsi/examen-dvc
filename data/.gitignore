@@ -3,4 +3,5 @@
 /gbrt_model.pkl
 /prediction.csv
 /raw
-/processed
+/preprocessed
+/predictions.csv

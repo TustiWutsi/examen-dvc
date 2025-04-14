@@ -1,0 +1,25 @@
+dvc stage add -n load_and_split \
+              -d src/data/import_raw_data.py \
+              -o data/raw -o data/processed \
+              python src/data/import_raw_data.py
+
+dvc stage add -n normalize_data \
+              -d src/data/normalize_data.py -d data/processed/X_train.csv -d data/processed/X_test.csv \
+              -o data/processed/X_test_scaled.csv -o data/processed/X_train_scaled.csv \
+              python src/data/normalize_data.py
+
+dvc stage add -n find_best_params \
+              -d src/models/grid_search.py -d data/processed/X_train_scaled.csv -d data/processed/y_train.csv \
+              -o models/best_params.pkl \
+              python src/models/grid_search.py
+
+dvc stage add -n train_best_model \
+              -d src/models/train_model.py -d data/processed/X_train_scaled.csv -d data/processed/y_train.csv -d models/best_params.pkl \
+              -o models/trained_model.pkl \
+              python src/models/train_model.py
+
+dvc stage add -n evaluate_model \
+              -d src/models/evaluate_model.py -d data/processed/X_test_scaled.csv -d data/processed/y_test.csv -d models/trained_model.pkl \
+              -o data/predictions.csv \
+              -M metrics/scores.json \
+              python src/models/evaluate_model.py
